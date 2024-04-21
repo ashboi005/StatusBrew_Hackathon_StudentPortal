@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal Dashboard</title>
+
+    <style>
+        body {
+            font-family: Comic Sans MS;
+            margin: 0;
+            padding: 0;
+            background-image: url('/static/bg.jpg');
+            border-radius: 50px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f7fafbf6;
+            border-radius: 90px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: blue;
+
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border-radius: 70px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 20px 40px;
+            background-color: blue;
+            color: #fff;
+            border: silver;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: blue (115, 64, 162);
+            transform: scale(1.1);
+        }
+
+        .container{
+
+            animation-duration: 1s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards ;
+        }
+
+        .container.fadeInUp{
+            animation-name: fadeInUp;
+        }
+
+        .section-header {
+            color: #0E64F2;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                width: 1000px;
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                width:800px;
+                opacity:1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container fadeInUp">
+        <h1>Dashboard</h1>
+        <h1>Welcome {{ user_details.name }}</h1>
+        <button onclick="window.location.href='/messages'">Messages</button>
+        <button onclick="window.location.href='/result'">Result</button>
+        <button onclick="window.location.href='/fee'">Fee Details</button>
+        <button onclick="window.location.href='/student_attendance'">Attendance Record</button>
+
+        {% if user_details %}
+            <!-- Personal Details -->
+            <h2 class="section-header">Personal Details</h2>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="{{ user_details.name }}" {% if user_details.name %}readonly{% endif %} required>
+            <label for="student_id">Student ID/Roll no:</label>
+            <input type="text" id="student_id" name="student_id" value="{{ user_details.student_id }}" {% if user_details.student_id %}readonly{% endif %} required>
+            <label for="dob">Date of Birth (YYYY-MM-DD):</label>
+            <input type="text" id="dob" name="date_of_birth"  pattern="\d{4}-\d{2}-\d{2}" value="{{ user_details.date_of_birth }}" {% if user_details.date_of_birth %}readonly{% endif %} required>
+            <label for="gender">Gender:</label>
+            <input type="text" id="gender" name="gender" value="{{ user_details.gender }}" {% if user_details.gender %}readonly{% endif %}>
+            <label for="phone_number">Phone:</label>
+            <input type="text" id="phone_number" name="phone_number" value="{{ user_details.phone_number }}" {% if user_details.phone_number %}readonly{% endif %}>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{ user_details.email }}" {% if user_details.email %}readonly{% endif %}>
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" value="{{ user_details.address }}" {% if user_details.address %}readonly{% endif %}>
+
+            <!-- Academic Information -->
+            <h2 class="section-header">Academic Information</h2>
+            <label for="course_name">Course Name:</label>
+            <input type="text" id="course_name" name="course_name" value="{{ user_details.course_name }}" {% if user_details.course_name %}readonly{% endif %}>
+            <label for="semester">Semester:</label>
+            <input type="text" id="semester" name="semester" value="{{ user_details.semester }}" {% if user_details.semester %}readonly{% endif %}>
+            <label for="department">Department:</label>
+            <input type="text" id="department" name="department" value="{{ user_details.department }}" {% if user_details.department %}readonly{% endif %}>
+            <label for="course_code">Course Code:</label>
+            <input type="text" id="course_code" name="course_code" value="{{ user_details.course_code }}" {% if user_details.course_code %}readonly{% endif %}>
+
+            <!-- Parent/Guardian Details -->
+            <h2 class="section-header">Guardian Details</h2>
+            <label for="parent_name">Parent/Guardian Name:</label>
+            <input type="text" id="parent_name" name="parent_name" value="{{ user_details.parent_name }}" {% if user_details.parent_name %}readonly{% endif %}>
+            <label for="relationship">Relationship:</label>
+            <input type="text" id="relationship" name="relationship" value="{{ user_details.relationship }}" {% if user_details.relationship %}readonly{% endif %}>
+            <label for="parent_phone_number">Parent Phone:</label>
+            <input type="tel" id="parent_phone_number" name="parent_phone_number" value="{{ user_details.parent_phone_number }}" {% if user_details.parent_phone_number %}readonly{% endif %}>
+            <label for="parent_email">Parent Email:</label>
+            <input type="email" id="parent_email" name="parent_email" value="{{ user_details.parent_email }}" {% if user_details.parent_email %}readonly{% endif %}>
+            <label for="parent_address">Parent Address:</label>
+            <input type="text" id="parent_address" name="parent_address" value="{{ user_details.parent_address }}" {% if user_details.parent_address %}readonly{% endif %}>
+
+        {% else %}
+
+            <form action="/submit_details" method="post">
+                <!-- Personal Details -->
+                <h2>Personal Details</h2>
+                <label for="name_input">Name:</label>
+                <input type="text" id="name_input" name="name" required>
+                <label for="student_id_input">Student ID/Roll no:</label>
+                <input type="text" id="student_id_input" name="student_id" required>
+                <label for="dob_input">Date of Birth (YYYY-MM-DD):</label>
+                <input type="text" id="dob_input" name="date_of_birth" pattern="\d{4}-\d{2}-\d{2}" required>
+                <label for="gender_input">Gender:</label>
+                <input type="text" id="gender_input" name="gender">
+                <label for="phone_number_input">Phone:</label>
+                <input type="text" id="phone_number_input" name="phone_number">
+                <label for="email_input">Email:</label>
+                <input type="email" id="email_input" name="email">
+                <label for="address_input">Address:</label>
+                <input type="text" id="address_input" name="address">
+
+                <!-- Academic Information -->
+                <h2>Academic Information</h2>
+                <label for="course_name_input">Course Name:</label>
+                <input type="text" id="course_name_input" name="course_name">
+                <label for="semester_input">Semester:</label>
+                <input type="text" id="semester_input" name="semester">
+                <label for="department_input">Department:</label>
+                <input type="text" id="department_input" name="department">
+                <label for="course_code_input">Course Code:</label>
+                <input type="text" id="course_code_input" name="course_code">
+
+                <!-- Parent/Guardian Details -->
+                <h2>Parent/Guardian Details</h2>
+                <label for="parent_name_input">Parent/Guardian Name:</label>
+                <input type="text" id="parent_name_input" name="parent_name">
+                <label for="relationship_input">Relationship:</label>
+                <input type="text" id="relationship_input" name="relationship">
+                <label for="parent_phone_number_input">Parent Phone:</label>
+                <input type="tel" id="parent_phone_number_input" name="parent_phone_number">
+                <label for="parent_email_input">Parent Email:</label>
+                <input type="email" id="parent_email_input" name="parent_email">
+                <label for="parent_address_input">Parent Address:</label>
+                <input type="text" id="parent_address_input" name="parent_address">
+
+
+                <button onclick="submitForm()">Submit</button>
+
+
+            </form>
+        {% endif %}
+    </div>
+
+
+   <script>
+        function submitForm() {
+            const name = document.getElementById('name').value;
+            const student_id = document.getElementById('student_id').value;
+            const dob= document.getElementById('dob').value;
+            const gender = document.getElementById('gender').value;
+            const phone_number = document.getElementById('phone_number').value;
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+            const course_name = document.getElementById('course_name').value;
+            const semester = document.getElementById('semester').value;
+            const department = document.getElementById('department').value;
+            const course_code= document.getElementById('course_code').value;
+            const parent_name = document.getElementById('parent_name').value;
+            const relationship = document.getElementById('relationship').value;
+            const parent_phone_number = document.getElementById('parent_phone_number').value;
+            const parent_email = document.getElementById('parent_email').value;
+            const parent_address =document.getElementById('parent_address').value;
+
+
+
+             console.log((`name: ${name}, student_id: ${student_id}, dob: ${dob}, gender: ${gender}, phone_number: ${phone_numbe},email: ${email},address : ${address },course_name: ${course_name}, semester: ${semester}, department: ${department},course_code: ${course_code}', parent_name:${ parent_name },relationship : ${relationship},parent_phone_number:${parent_phone_number},parent_email:${parent_email},parent_address=${parent_address}}`));
+
+
+
+
+        }
+    </script>
+</body>
+</html>

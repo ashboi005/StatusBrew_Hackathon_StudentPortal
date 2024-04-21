@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fee Details</title>
+    <link rel="stylesheet" href="/static/fee_css.css">
+</head>
+<body>
+    <h1>Fee Details</h1>
+    <img src="/static/logo.png" alt="Logo" class="logo">
+    <ul>
+        {% for fee in user_details.fees %}
+            <li><strong><button>Amount: </button></strong> {{ fee.fee_amount }}</li>
+            <li><strong><button>Description: </button></strong>{{ fee.fee_description }}</li>
+            <br>
+        {% endfor %}
+    </ul>
+</body>
+</html>

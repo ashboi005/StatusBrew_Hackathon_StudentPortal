@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result System</title>
+    <link rel="stylesheet" href="/static/message_system_css.css">
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="/edit_dashboard/{{ user.id }}">Update Details</a></li>
+            <li><a href="/message_system/{{ user.id }}">Send Message</a></li>
+            <li><a href="/result_system/{{ user.id }}">Result</a></li>
+            <li><a href="/attendance">Attendance</a></li>
+            <li><a href="/fees_system/{{ user.id }}">Fees Status</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="form-container">
+            <h1>Result System</h1>
+            <form action="/add_result/{{ user_id }}" method="post">
+                <label for="result_text">Result:</label><br>
+                <textarea id="result_text" name="result_text" rows="4" cols="50"></textarea><br>
+                <button type="submit">Add Result</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance</title>
+    <!-- Add any necessary CSS styles here -->
+    <style>
+        th, td {
+            padding: 10px; /* Add padding to create a little gap */
+        }
+    </style>
+</head>
+<body>
+    <h1>My Attendance Record</h1>
+    <h2>Welcome, {{ student_name }}</h2> <!-- Display the student's name here -->
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Time Stamp</th>
+                <th>Student Name</th>
+                <!-- Add more table headers as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in attendance_records %}
+            <tr>
+                <td>{{ record['Date'] }}</td>
+                <td>{{ record['Time Stamp'] }}</td>
+                <td>{{ record['Student Name'] }}</td>
+
+                <!-- Add more table cells as needed -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

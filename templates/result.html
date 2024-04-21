@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <!-- Add any necessary CSS styles here -->
+</head>
+<body>
+    <h1>Results</h1>
+    <ul>
+        {% for result in user_details.results %}
+            <li>{{ result.result_text }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

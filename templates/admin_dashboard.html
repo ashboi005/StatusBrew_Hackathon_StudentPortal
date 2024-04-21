@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #2980b9, #6dd5fa);
+            /* Background gradient */
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #fff;
+            /* Title color */
+        }
+
+        .user-list {
+            max-width: 800px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .user-box {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .user-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .user-box:before {
+            content: "";
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: calc(100% + 40px);
+            height: calc(100% + 40px);
+            background: rgba(255, 255, 255, 0.5);
+            /* Semi-transparent background overlay */
+            z-index: -1;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .user-box:hover:before {
+            transform: scale(1.2);
+            /* Scale up the overlay on hover */
+        }
+
+        .user-box p {
+            margin: 10px 0;
+            color: #555;
+        }
+
+        .user-box strong {
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Admin Dashboard</h1>
+    <div class="user-list">
+        {% for user in users %}
+        <div class="user-box" onclick="location.href='/edit_dashboard/{{ user.id }}';">
+            <p><strong>Name:</strong> {{ user.name }}</p>
+            <p><strong>Student ID/Roll no:</strong> {{ user.student_id }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
