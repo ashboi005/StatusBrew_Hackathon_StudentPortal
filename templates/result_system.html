@@ -19,7 +19,7 @@
     <div class="container">
         <div class="form-container">
             <h1>Result System</h1>
-            <form action="/add_result/{{ user_id }}" method="post">
+            <form action="/add_result/{{ user.id }}" method="post">
                 <label for="result_text">Result:</label><br>
                 <textarea id="result_text" name="result_text" rows="4" cols="50"></textarea><br>
                 <button type="submit">Add Result</button>
